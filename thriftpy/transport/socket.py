@@ -146,7 +146,7 @@ class TServerSocket(object):
     """Socket implementation for server side."""
 
     def __init__(self, host=None, port=None, unix_socket=None,
-                 socket_family=socket.AF_INET, client_timeout=3000,
+                 socket_family=socket.AF_INET, client_timeout=None,
                  backlog=128):
         """Initialize a TServerSocket
 
