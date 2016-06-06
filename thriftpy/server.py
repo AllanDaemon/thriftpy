@@ -68,7 +68,7 @@ class TThreadedServer(TServer):
     """Threaded server that spawns a new thread per each connection."""
 
     def __init__(self, *args, **kwargs):
-        self.daemon = kwargs.pop("daemon", False)
+        self.daemon = kwargs.pop("daemon", True)
         TServer.__init__(self, *args, **kwargs)
         self.closed = False
 
@@ -91,7 +91,7 @@ class TThreadedServer(TServer):
         iprot = self.iprot_factory.get_protocol(itrans)
         oprot = self.oprot_factory.get_protocol(otrans)
         try:
-            while True:
+            while not self.closed:
                 self.processor.process(iprot, oprot)
         except TTransportException:
             pass
